@@ -23,7 +23,6 @@ export const ORGANIZATION = {
   mapsDirectionsUrl:
     'https://www.google.com/maps/search/?api=1&query=90%20Birchtree%20Avenue%2C%20Peterborough%20PE1%204HW',
   facebookUrl: 'https://www.facebook.com/ZiyaratwithSyedAsad/',
-  instagramUrl: 'https://www.instagram.com/ziyaratwithasadalishah/',
   tiktokUrl: 'https://www.tiktok.com/@ziyaratwithasad',
   youtubeUrl: 'https://www.youtube.com/@ZiyaratwithAsad',
   youtubeChannelId: 'UCxW3tyq1qrb1lFqX8zhlmJg',
