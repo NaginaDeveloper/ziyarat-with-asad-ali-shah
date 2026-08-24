@@ -1,0 +1,44 @@
+<section class="bg-sand pb-20 pt-12">
+  <div class="mx-auto max-w-5xl px-5 sm:px-8">
+    <a routerLink="/tours" class="text-sm font-semibold text-emerald-600 hover:text-gold-600">← All tours</a>
+
+    @if (tour(); as t) {
+      <div class="mt-6 overflow-hidden rounded-3xl bg-cream shadow-soft">
+        <img [src]="thumb(t.imageVideoId)" [alt]="t.title" class="h-64 w-full object-cover sm:h-80" />
+        <div class="p-6 sm:p-10">
+          <p class="text-xs uppercase tracking-[0.16em] text-gold-600">{{ t.duration }} · {{ t.group }}</p>
+          <h1 class="mt-2 font-display text-4xl font-semibold text-forest sm:text-5xl">{{ t.title }}</h1>
+          <p class="mt-2 font-medium text-emerald-600">{{ t.region }}</p>
+          <p class="mt-6 text-lg leading-relaxed text-slate-warm">{{ t.story }}</p>
+
+          <h2 class="mt-10 font-display text-2xl font-semibold text-forest">Stops</h2>
+          <ul class="mt-4 space-y-4">
+            @for (stop of t.stops; track stop.place) {
+              <li class="rounded-2xl border border-mist bg-sand/60 p-4">
+                <p class="font-semibold text-forest">{{ stop.place }}</p>
+                <p class="mt-1 text-sm text-slate-warm">{{ stop.note }}</p>
+              </li>
+            }
+          </ul>
+
+          <h2 class="mt-10 font-display text-2xl font-semibold text-forest">What to expect</h2>
+          <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+            @for (item of t.includes; track item) {
+              <li class="rounded-xl bg-sand px-4 py-3 text-sm text-forest">{{ item }}</li>
+            }
+          </ul>
+
+          <a
+            routerLink="/enquire"
+            [queryParams]="{ tour: t.slug }"
+            class="mt-10 inline-flex rounded-full bg-gold px-8 py-3.5 font-semibold text-forest hover:bg-gold-300"
+          >
+            Enquire about this tour
+          </a>
+        </div>
+      </div>
+    } @else {
+      <p class="mt-10 text-slate-warm">This tour was not found.</p>
+    }
+  </div>
+</section>

@@ -1,0 +1,158 @@
+<section class="relative isolate overflow-hidden bg-forest text-cream">
+  <div class="absolute inset-0 -z-20 bg-gradient-to-br from-forest via-emerald to-forest-800" aria-hidden="true"></div>
+  <div class="geo-pattern-dense absolute inset-0 -z-10" aria-hidden="true"></div>
+
+  <div class="mx-auto flex min-h-[88vh] max-w-5xl flex-col items-center justify-center px-5 py-24 text-center sm:px-8">
+    <p class="animate-fade-up font-arabic text-3xl text-gold-300 sm:text-4xl" lang="ar" dir="rtl">
+      بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+    </p>
+    <img
+      src="brand/logo.png"
+      alt=""
+      width="96"
+      height="96"
+      class="animate-fade-up mt-8 h-24 w-24 rounded-full bg-cream object-cover ring-2 ring-gold/50"
+      style="animation-delay: 0.06s"
+    />
+    <h1
+      class="animate-fade-up mt-6 font-display text-4xl font-bold leading-tight sm:text-6xl"
+      style="animation-delay: 0.1s"
+    >
+      Ziyarat with <span class="text-gold-gradient">Asad Ali Shah</span>
+    </h1>
+    <p
+      class="animate-fade-up mt-5 max-w-2xl text-lg leading-relaxed text-cream/75 sm:text-xl"
+      style="animation-delay: 0.18s"
+    >
+      Scholar-led journeys to the sacred sites of Islam — Iraq, the Two Holy Mosques, Al-Quds,
+      the cities of the awliya, and the heritage of Bosnia.
+    </p>
+    <div class="animate-fade-up mt-10 flex flex-wrap items-center justify-center gap-4" style="animation-delay: 0.26s">
+      <a
+        routerLink="/tours"
+        class="rounded-full bg-gold px-8 py-3.5 font-semibold text-forest transition hover:bg-gold-300"
+      >
+        View tours
+      </a>
+      <a
+        routerLink="/enquire"
+        class="rounded-full border border-cream/25 px-8 py-3.5 font-medium text-cream/90 hover:border-gold/50 hover:text-gold-300"
+      >
+        Enquire for dates
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="bg-sand py-20">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">The host</p>
+    <div class="mt-4 grid gap-10 md:grid-cols-2 md:items-center">
+      <div>
+        <h2 class="font-display text-4xl font-semibold text-forest">Syed Asad Ali Shah</h2>
+        <p class="mt-4 text-base leading-relaxed text-slate-warm">
+          A UK Islamic scholar and television host based in Peterborough. He takes groups to the
+          maqamat, explains the history of each shrine, and films the ziyarat so those at home can
+          still walk the path in knowledge.
+        </p>
+        <a routerLink="/about" class="mt-6 inline-flex font-semibold text-emerald-600 hover:text-gold-600">
+          Read his story →
+        </a>
+      </div>
+      <blockquote class="rounded-3xl border border-gold/20 bg-cream p-8 shadow-soft">
+        <p class="font-display text-2xl italic text-forest">
+          “I was fortunate to be with the group in October 2023. We visited Iraq and the three
+          blessed places of Baghdad Sharif, Najaf…”
+        </p>
+        <footer class="mt-4 text-sm text-slate-warm">Najabat Mahmood · traveller, Iraq ziyarat</footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="bg-cream py-20">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="flex items-end justify-between gap-4">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">Journeys</p>
+        <h2 class="mt-2 font-display text-4xl font-semibold text-forest">Where we take groups</h2>
+      </div>
+      <a routerLink="/tours" class="hidden font-semibold text-emerald-600 sm:inline">All tours →</a>
+    </div>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @for (tour of tours; track tour.slug) {
+        <a
+          [routerLink]="['/tours', tour.slug]"
+          class="group overflow-hidden rounded-3xl bg-forest text-cream shadow-portal"
+        >
+          <div class="relative aspect-[16/10] overflow-hidden">
+            <img
+              [src]="thumb(tour.imageVideoId)"
+              [alt]="tour.title"
+              class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-forest via-forest/20 to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <p class="text-xs uppercase tracking-[0.16em] text-gold-300">{{ tour.duration }}</p>
+            <h3 class="mt-2 font-display text-2xl font-semibold">{{ tour.title }}</h3>
+            <p class="mt-2 text-sm text-cream/70">{{ tour.region }}</p>
+          </div>
+        </a>
+      }
+    </div>
+    <a routerLink="/tours" class="mt-8 inline-flex font-semibold text-emerald-600 sm:hidden">All tours →</a>
+  </div>
+</section>
+
+<section class="bg-forest py-20 text-cream">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="flex items-end justify-between gap-4">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">On film</p>
+        <h2 class="mt-2 font-display text-4xl font-semibold">Recent ziyarat films</h2>
+      </div>
+      <a
+        [href]="org.youtubeUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden text-sm font-semibold text-gold-300 sm:inline"
+      >
+        YouTube channel →
+      </a>
+    </div>
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      @for (film of films; track film.id) {
+        <a
+          [href]="watch(film.id)"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="overflow-hidden rounded-2xl bg-forest-800 ring-1 ring-white/10"
+        >
+          <img [src]="thumb(film.id)" [alt]="film.title" class="aspect-video w-full object-cover" />
+          <div class="p-4">
+            <p class="text-xs uppercase tracking-wider text-gold-300">{{ film.place }}</p>
+            <p class="mt-1 font-medium leading-snug">{{ film.title }}</p>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="bg-sand py-16">
+  <div class="mx-auto max-w-3xl px-5 text-center sm:px-8">
+    <h2 class="font-display text-3xl font-semibold text-forest sm:text-4xl">
+      Ready to travel with knowledge?
+    </h2>
+    <p class="mt-4 text-slate-warm">
+      Tell us which ziyarat you have in mind. Dates, group size and itinerary are confirmed by email.
+    </p>
+    <a
+      routerLink="/enquire"
+      class="mt-8 inline-flex rounded-full bg-gold px-8 py-3.5 font-semibold text-forest hover:bg-gold-300"
+    >
+      Send an enquiry
+    </a>
+  </div>
+</section>

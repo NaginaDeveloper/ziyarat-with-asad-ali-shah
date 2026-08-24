@@ -1,0 +1,78 @@
+<section class="bg-sand pb-20 pt-12">
+  <div class="mx-auto grid max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-5">
+    <div class="lg:col-span-2">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">Enquire</p>
+      <h1 class="mt-2 font-display text-4xl font-semibold text-forest">Travel with the group</h1>
+      <p class="mt-4 text-slate-warm">
+        Send a note with your names, preferred tour and dates. The form opens your email to
+        {{ org.email }} — nothing is stored on this website.
+      </p>
+      <ul class="mt-8 space-y-3 text-sm text-forest">
+        <li>{{ org.addressFull }}</li>
+        <li>
+          <a [href]="'mailto:' + org.email" class="text-emerald-600 hover:underline">{{ org.email }}</a>
+        </li>
+        <li>
+          <a [href]="org.facebookUrl" target="_blank" rel="noopener noreferrer" class="text-emerald-600 hover:underline">
+            Facebook page
+          </a>
+        </li>
+      </ul>
+      <a
+        [href]="org.mapsDirectionsUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-8 inline-flex rounded-full border border-gold/30 bg-cream px-5 py-3 text-sm font-semibold text-forest hover:border-gold"
+      >
+        Open in Google Maps
+      </a>
+    </div>
+
+    <form class="lg:col-span-3 rounded-3xl bg-cream p-6 shadow-soft sm:p-8" (ngSubmit)="submit()" [formGroup]="form">
+      <div class="grid gap-5 sm:grid-cols-2">
+        <label class="block text-sm font-medium text-forest">
+          Full name
+          <input class="mt-2 w-full rounded-xl border border-mist bg-white px-3 py-3" formControlName="name" autocomplete="name" />
+        </label>
+        <label class="block text-sm font-medium text-forest">
+          Email
+          <input class="mt-2 w-full rounded-xl border border-mist bg-white px-3 py-3" formControlName="email" type="email" autocomplete="email" />
+        </label>
+        <label class="block text-sm font-medium text-forest">
+          Phone
+          <input class="mt-2 w-full rounded-xl border border-mist bg-white px-3 py-3" formControlName="phone" type="tel" autocomplete="tel" />
+        </label>
+        <label class="block text-sm font-medium text-forest">
+          Number of travellers
+          <input class="mt-2 w-full rounded-xl border border-mist bg-white px-3 py-3" formControlName="party" />
+        </label>
+        <label class="block text-sm font-medium text-forest sm:col-span-2">
+          Tour
+          <select class="mt-2 w-full rounded-xl border border-mist bg-white px-3 py-3" formControlName="tour">
+            <option value="">I am not sure yet</option>
+            @for (tour of tours; track tour.slug) {
+              <option [value]="tour.slug">{{ tour.title }}</option>
+            }
+          </select>
+        </label>
+        <label class="block text-sm font-medium text-forest sm:col-span-2">
+          Preferred dates
+          <input class="mt-2 w-full rounded-xl border border-mist bg-white px-3 py-3" formControlName="dates" placeholder="e.g. Muharram 2027, or October half-term" />
+        </label>
+        <label class="block text-sm font-medium text-forest sm:col-span-2">
+          Message
+          <textarea class="mt-2 min-h-32 w-full rounded-xl border border-mist bg-white px-3 py-3" formControlName="message"></textarea>
+        </label>
+      </div>
+      <button
+        type="submit"
+        class="mt-6 rounded-full bg-gold px-8 py-3.5 font-semibold text-forest hover:bg-gold-300"
+      >
+        Open email to send
+      </button>
+      @if (sent) {
+        <p class="mt-4 text-sm text-emerald-600">Your mail app should open. If it does not, write to {{ org.email }}.</p>
+      }
+    </form>
+  </div>
+</section>

@@ -1,0 +1,34 @@
+<section class="bg-sand pb-20 pt-12">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">On film</p>
+    <h1 class="mt-2 font-display text-4xl font-semibold text-forest sm:text-5xl">Journeys</h1>
+    <p class="mt-4 max-w-2xl text-slate-warm">
+      Films from the official YouTube channel — shrines, prophetic sites, and the adab of ziyarat.
+      Watch on YouTube, then enquire if you wish to walk them in person.
+    </p>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @for (film of films; track film.id) {
+        <a
+          [href]="watch(film.id)"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="overflow-hidden rounded-3xl bg-cream shadow-soft"
+        >
+          <img [src]="thumb(film.id)" [alt]="film.title" class="aspect-video w-full object-cover" />
+          <div class="p-5">
+            <p class="text-xs uppercase tracking-wider text-gold-600">{{ film.place }}</p>
+            <h2 class="mt-1 font-display text-xl font-semibold text-forest">{{ film.title }}</h2>
+          </div>
+        </a>
+      }
+    </div>
+    <a
+      [href]="org.youtubeUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-10 inline-flex font-semibold text-emerald-600"
+    >
+      Full channel on YouTube →
+    </a>
+  </div>
+</section>
