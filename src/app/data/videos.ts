@@ -364,37 +364,37 @@ export const JOURNEY_VIDEOS: readonly JourneyVideo[] = [
   {
     id: '9Wf_D0HRD8o',
     title: 'Channel update — 1 February 2026',
-    place: 'Journey film',
+    place: 'Channel video',
   },
   {
     id: 'DNJTh9TRnSk',
     title: 'Channel update — 12 June 2026',
-    place: 'Journey film',
+    place: 'Channel video',
   },
   {
     id: 'zgqbQ06oYFc',
     title: 'Channel update — 13 June 2026',
-    place: 'Journey film',
+    place: 'Channel video',
   },
   {
     id: 'TIGZVFj_ma4',
     title: 'Channel update — 15 February 2026',
-    place: 'Journey film',
+    place: 'Channel video',
   },
   {
     id: 'BZHc3xduWTc',
     title: 'Channel update — 3 March 2026',
-    place: 'Journey film',
+    place: 'Channel video',
   },
   {
     id: 'dP2sbCbfX7s',
     title: 'Channel update — 7 July 2026',
-    place: 'Journey film',
+    place: 'Channel video',
   },
   {
     id: 'Upe6h70dHrA',
     title: 'Channel update — 9 April 2026',
-    place: 'Journey film',
+    place: 'Channel video',
   },
 ];
 
@@ -419,6 +419,6 @@ export function youtubeEmbedUrl(id: string): string {
 
 export function videosByIds(ids: readonly string[]): JourneyVideo[] {
   return ids
-    .map((id) => JOURNEY_VIDEOS.find((film) => film.id === id))
-    .filter((film): film is JourneyVideo => film !== undefined);
+    .map((id) => JOURNEY_VIDEOS.find((video) => video.id === id))
+    .filter((video): video is JourneyVideo => video !== undefined);
 }

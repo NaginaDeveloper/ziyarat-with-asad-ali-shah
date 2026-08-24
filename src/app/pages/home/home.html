@@ -144,7 +144,7 @@
       <h2 class="mt-2 font-display text-4xl font-semibold text-ink sm:text-5xl">{{ org.hostName }}</h2>
       <p class="mt-5 text-base leading-relaxed text-muted">
         A UK Islamic scholar and television host. He takes groups to the maqamat, explains the history of
-        each shrine, and films the ziyarat so those at home can still walk the path in knowledge.
+        each shrine, and records the ziyarat so those at home can still walk the path in knowledge.
       </p>
       <a
         routerLink="/about"
@@ -166,22 +166,22 @@
   <div class="mx-auto max-w-6xl px-5 sm:px-8">
     <div class="flex flex-wrap items-end justify-between gap-4">
       <div>
-        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-copper">On film</p>
-        <h2 class="mt-2 font-display text-4xl font-semibold">Recent ziyarat films</h2>
+        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-copper">On the channel</p>
+        <h2 class="mt-2 font-display text-4xl font-semibold">Recent ziyarat videos</h2>
       </div>
       <a routerLink="/journeys" class="text-sm font-semibold text-copper">Watch in the archive</a>
     </div>
     <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      @for (film of films; track film.id) {
+      @for (video of videos; track video.id) {
         <button
           type="button"
           class="group overflow-hidden rounded-2xl bg-midnight-800 text-left ring-1 ring-white/10"
-          (click)="playing.set(film.id)"
+          (click)="playing.set(video.id)"
         >
           <span class="relative block aspect-video overflow-hidden">
             <img
-              [src]="thumb(film.id)"
-              [alt]="film.title"
+              [src]="thumb(video.id)"
+              [alt]="video.title"
               class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
             />
             <span
@@ -192,8 +192,8 @@
             </span>
           </span>
           <span class="block p-4">
-            <span class="block text-xs uppercase tracking-wider text-copper">{{ film.place }}</span>
-            <span class="mt-1 block font-medium leading-snug">{{ film.title }}</span>
+            <span class="block text-xs uppercase tracking-wider text-copper">{{ video.place }}</span>
+            <span class="mt-1 block font-medium leading-snug">{{ video.title }}</span>
           </span>
         </button>
       }

@@ -1,26 +1,73 @@
 <section class="bg-parchment pb-24 pt-12">
   <div class="mx-auto max-w-6xl px-5 sm:px-8">
     <p class="text-xs font-semibold uppercase tracking-[0.22em] text-copper">Archive</p>
-    <h1 class="mt-2 font-display text-4xl font-semibold text-ink sm:text-6xl">Journeys on film</h1>
+    <h1 class="mt-2 font-display text-4xl font-semibold text-ink sm:text-6xl">Ziyarat videos</h1>
     <p class="mt-4 max-w-2xl text-muted">
-      Films from the official channel — shrines, prophetic sites, and the adab of ziyarat. Watch here,
-      then enquire if you wish to walk them in person.
+      From the official channel — shrines, prophetic sites, and the adab of ziyarat. Watch here, then
+      enquire if you wish to walk them in person.
     </p>
-    <div class="mt-12 columns-1 gap-5 sm:columns-2 lg:columns-3">
-      @for (film of films; track film.id) {
-        <button
-          type="button"
-          class="mb-5 block w-full break-inside-avoid overflow-hidden rounded-2xl bg-midnight text-left text-parchment shadow-card"
-          (click)="playing.set(film.id)"
-        >
-          <img [src]="thumb(film.id)" [alt]="film.title" class="aspect-video w-full object-cover" />
-          <span class="block p-5">
-            <span class="block text-xs uppercase tracking-wider text-copper">{{ film.place }}</span>
-            <span class="mt-1 block font-display text-xl font-semibold">{{ film.title }}</span>
-          </span>
-        </button>
-      }
+
+    <div class="mt-10 max-w-xl">
+      <label class="sr-only" for="video-search">Search videos</label>
+      <div class="relative">
+        <input
+          id="video-search"
+          type="search"
+          [value]="query()"
+          (input)="onSearch($event)"
+          placeholder="Search by place or title — Karbala, Hajj, Bosnia…"
+          autocomplete="off"
+          class="w-full rounded-xl border border-stone bg-white py-3.5 pl-4 pr-12 text-ink outline-none placeholder:text-muted/70 focus:border-copper"
+        />
+        @if (query()) {
+          <button
+            type="button"
+            class="absolute inset-y-0 right-0 px-4 text-sm font-medium text-muted hover:text-ink"
+            (click)="clearSearch()"
+          >
+            Clear
+          </button>
+        }
+      </div>
+      <p class="mt-2 text-sm text-muted">
+        @if (query().trim()) {
+          {{ videos().length }} of {{ totalCount }} video{{ videos().length === 1 ? '' : 's' }} match
+          “{{ query().trim() }}”
+        } @else {
+          {{ totalCount }} videos
+        }
+      </p>
     </div>
+
+    @if (videos().length) {
+      <div class="mt-8 columns-1 gap-5 sm:columns-2 lg:columns-3">
+        @for (video of videos(); track video.id) {
+          <button
+            type="button"
+            class="mb-5 block w-full break-inside-avoid overflow-hidden rounded-2xl bg-midnight text-left text-parchment shadow-card"
+            (click)="playing.set(video.id)"
+          >
+            <img [src]="thumb(video.id)" [alt]="video.title" class="aspect-video w-full object-cover" />
+            <span class="block p-5">
+              <span class="block text-xs uppercase tracking-wider text-copper">{{ video.place }}</span>
+              <span class="mt-1 block font-display text-xl font-semibold">{{ video.title }}</span>
+            </span>
+          </button>
+        }
+      </div>
+    } @else {
+      <p class="mt-12 max-w-md text-muted">
+        No videos match “{{ query().trim() }}”. Try a place name like Najaf, Makkah, or Sarajevo.
+      </p>
+      <button
+        type="button"
+        class="mt-4 text-sm font-semibold text-ink underline decoration-copper underline-offset-4"
+        (click)="clearSearch()"
+      >
+        Clear search
+      </button>
+    }
+
     <a
       [href]="org.youtubeUrl"
       target="_blank"

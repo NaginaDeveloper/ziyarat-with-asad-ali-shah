@@ -37,7 +37,7 @@ export class Header {
 
   protected readonly links: readonly NavItem[] = [
     { label: 'Journeys', path: '/tours' },
-    { label: 'On film', path: '/journeys' },
+    { label: 'Videos', path: '/journeys' },
     { label: 'The guide', path: '/about' },
   ];
 

@@ -25,7 +25,7 @@ export const routes: Routes = [
   {
     path: 'journeys',
     loadComponent: () => import('./pages/journeys/journeys-page').then((m) => m.JourneysPage),
-    title: 'Journeys on film | Ziyarat with Asad Ali Shah',
+    title: 'Ziyarat videos | Ziyarat with Asad Ali Shah',
   },
   {
     path: 'enquire',

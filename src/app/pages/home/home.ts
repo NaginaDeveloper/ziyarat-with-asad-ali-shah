@@ -27,7 +27,7 @@ export class Home implements OnInit {
   protected readonly featured = TOURS[0];
   protected readonly rest = TOURS.slice(1);
   protected readonly chips = DESTINATION_FILTERS.filter((item) => item.id !== 'all');
-  protected readonly films = JOURNEY_VIDEOS.slice(0, 6);
+  protected readonly videos = JOURNEY_VIDEOS.slice(0, 6);
   protected readonly quotes = TESTIMONIALS;
   protected readonly thumb = youtubeThumbUrl;
   protected readonly chat = whatsappUrl(defaultWhatsAppText());
@@ -49,8 +49,8 @@ export class Home implements OnInit {
       body: 'Journeys leave from the UK when a group is ready. We confirm flights, visas and days by WhatsApp — no invented brochure prices.',
     },
     {
-      title: 'Films for those at home',
-      body: 'The same shrines are filmed so family who cannot travel can still walk the path in knowledge.',
+      title: 'Videos for those at home',
+      body: 'The same shrines are recorded so family who cannot travel can still walk the path in knowledge.',
     },
   ] as const;
 

@@ -41,17 +41,17 @@
           </div>
         </div>
 
-        @if (films().length) {
-          <h2 class="mt-14 font-display text-3xl font-semibold text-ink">Films from this journey</h2>
+        @if (videos().length) {
+          <h2 class="mt-14 font-display text-3xl font-semibold text-ink">Videos from this journey</h2>
           <div class="mt-6 grid gap-4 sm:grid-cols-2">
-            @for (film of films(); track film.id) {
+            @for (video of videos(); track video.id) {
               <button
                 type="button"
                 class="overflow-hidden rounded-2xl bg-midnight text-left text-parchment"
-                (click)="playing.set(film.id)"
+                (click)="playing.set(video.id)"
               >
-                <img [src]="thumb(film.id)" [alt]="film.title" class="aspect-video w-full object-cover" />
-                <span class="block p-4 text-sm font-medium">{{ film.title }}</span>
+                <img [src]="thumb(video.id)" [alt]="video.title" class="aspect-video w-full object-cover" />
+                <span class="block p-4 text-sm font-medium">{{ video.title }}</span>
               </button>
             }
           </div>

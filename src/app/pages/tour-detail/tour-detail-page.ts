@@ -26,7 +26,7 @@ export class TourDetailPage {
   );
 
   protected readonly tour = computed(() => tourBySlug(this.slug()));
-  protected readonly films = computed(() => videosByIds(this.tour()?.relatedVideoIds ?? []));
+  protected readonly videos = computed(() => videosByIds(this.tour()?.relatedVideoIds ?? []));
   protected readonly chat = computed(() => {
     const title = this.tour()?.title;
     return title ? tourWhatsAppUrl(title) : tourWhatsAppUrl('a ziyarat journey');

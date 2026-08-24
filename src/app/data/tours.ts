@@ -179,7 +179,7 @@ export const TOURS: readonly Tour[] = [
     faqs: [
       {
         q: 'Are you running this now?',
-        a: 'Only when access and safety make it responsible. Message us for an honest answer for the current season. The films remain on the channel for those who cannot travel.',
+        a: 'Only when access and safety make it responsible. Message us for an honest answer for the current season. The videos remain on the channel for those who cannot travel.',
       },
       {
         q: 'Is it a large group?',
