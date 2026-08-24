@@ -1,4 +1,4 @@
-<header class="sticky top-0 z-50 border-b border-gold/20 bg-forest/96 text-cream backdrop-blur-xl">
+<header [class]="headerClass">
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 sm:px-8">
     <a routerLink="/" (click)="close()" class="flex min-w-0 items-center gap-3">
       <img
@@ -6,39 +6,54 @@
         alt=""
         width="44"
         height="44"
-        class="h-11 w-11 rounded-full bg-cream object-cover ring-1 ring-gold/40"
+        class="h-11 w-11 rounded-full bg-parchment object-cover"
+        [class]="transparent ? 'ring-1 ring-parchment/30' : 'ring-1 ring-stone'"
       />
       <span class="min-w-0">
         <span class="block truncate font-display text-lg font-semibold leading-tight sm:text-xl">
-          Ziyarat with Asad Ali Shah
+        Ziyarat
         </span>
-        <span class="hidden text-[0.65rem] uppercase tracking-[0.18em] text-gold-300/80 sm:block">
+        <span
+          class="hidden text-[0.65rem] uppercase tracking-[0.18em] sm:block"
+          [class]="transparent ? 'text-parchment/70' : 'text-muted'"
+        >
           Sacred travel from the UK
         </span>
       </span>
     </a>
 
-    <nav class="hidden items-center gap-1 md:flex" aria-label="Primary">
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary">
       @for (link of links; track link.path) {
         <a
           [routerLink]="link.path"
-          routerLinkActive="text-gold-300"
-          class="rounded-full px-4 py-2 text-sm font-medium text-cream/85 transition hover:bg-white/8 hover:text-gold-300"
+          routerLinkActive="underline decoration-copper decoration-2 underline-offset-8"
+          class="rounded-lg px-4 py-2 text-sm font-medium transition hover:text-copper"
         >
           {{ link.label }}
         </a>
       }
       <a
-        routerLink="/enquire"
-        class="ml-2 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-forest transition hover:bg-gold-300"
+        [href]="chat"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="ml-2 inline-flex items-center gap-2 rounded-xl bg-whatsapp px-4 py-2 text-sm font-semibold text-white"
       >
-        Book a journey
+        <app-whatsapp-icon [size]="18" />
+        WhatsApp
+      </a>
+      <a
+        routerLink="/enquire"
+        class="rounded-xl px-4 py-2 text-sm font-semibold"
+        [class]="transparent ? 'bg-parchment text-ink' : 'bg-midnight text-parchment'"
+      >
+        Enquire
       </a>
     </nav>
 
     <button
       type="button"
-      class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream/20 md:hidden"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-xl border lg:hidden"
+      [class]="transparent ? 'border-parchment/25' : 'border-stone'"
       (click)="toggle()"
       [attr.aria-expanded]="open()"
       aria-controls="mobile-nav"
@@ -48,30 +63,35 @@
         <span class="text-lg" aria-hidden="true">×</span>
       } @else {
         <span class="flex flex-col gap-1.5" aria-hidden="true">
-          <span class="block h-0.5 w-5 bg-cream"></span>
-          <span class="block h-0.5 w-5 bg-cream"></span>
-          <span class="block h-0.5 w-4 bg-cream"></span>
+          <span class="block h-0.5 w-5" [class]="transparent ? 'bg-parchment' : 'bg-ink'"></span>
+          <span class="block h-0.5 w-5" [class]="transparent ? 'bg-parchment' : 'bg-ink'"></span>
+          <span class="block h-0.5 w-4" [class]="transparent ? 'bg-parchment' : 'bg-ink'"></span>
         </span>
       }
     </button>
   </div>
 
   @if (open()) {
-    <nav
-      id="mobile-nav"
-      class="border-t border-gold/15 px-5 py-4 md:hidden"
-      aria-label="Mobile"
-    >
+    <nav id="mobile-nav" class="border-t border-stone bg-parchment px-5 py-4 text-ink lg:hidden" aria-label="Mobile">
       <div class="flex flex-col gap-1">
         @for (link of links; track link.path) {
-          <a
-            [routerLink]="link.path"
-            (click)="close()"
-            class="rounded-xl px-3 py-3 text-base font-medium text-cream/90"
-          >
+          <a [routerLink]="link.path" (click)="close()" class="rounded-xl px-3 py-3 text-base font-medium">
             {{ link.label }}
           </a>
         }
+        <a
+          [href]="chat"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="close()"
+          class="inline-flex items-center gap-2 rounded-xl px-3 py-3 text-base font-semibold text-whatsapp"
+        >
+          <app-whatsapp-icon [size]="20" />
+          WhatsApp {{ org.phoneDisplay }}
+        </a>
+        <a routerLink="/enquire" (click)="close()" class="rounded-xl bg-midnight px-3 py-3 text-base font-semibold text-parchment">
+          Enquire for dates
+        </a>
       </div>
     </nav>
   }

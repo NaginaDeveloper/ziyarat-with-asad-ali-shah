@@ -1,0 +1,48 @@
+@if (featured()) {
+  <a
+    [routerLink]="['/tours', tour().slug]"
+    class="group relative isolate flex min-h-[28rem] overflow-hidden rounded-2xl text-parchment shadow-lift sm:min-h-[32rem]"
+  >
+    <img
+      [src]="tour().coverImage"
+      [alt]="tour().title"
+      class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/45 to-midnight/10"></div>
+    <div class="relative mt-auto flex w-full flex-col gap-3 p-6 sm:p-8">
+      <p class="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
+        {{ tour().duration }} · {{ tour().group }}
+      </p>
+      <h3 class="font-display text-4xl font-semibold leading-tight sm:text-5xl">{{ tour().title }}</h3>
+      <p class="max-w-xl text-sm text-parchment/80 sm:text-base">{{ tour().region }}</p>
+      <p class="max-w-xl text-sm text-parchment/70">{{ tour().summary }}</p>
+      <span class="mt-2 inline-flex text-sm font-semibold text-copper">View itinerary</span>
+    </div>
+  </a>
+} @else {
+  <a
+    [routerLink]="['/tours', tour().slug]"
+    class="group flex h-full flex-col overflow-hidden rounded-2xl bg-midnight text-parchment shadow-card"
+  >
+    <div class="relative aspect-[16/10] overflow-hidden">
+      <img
+        [src]="tour().coverImage"
+        [alt]="tour().title"
+        class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-midnight/80 to-transparent"></div>
+      <p
+        class="absolute bottom-3 left-3 rounded-md bg-parchment/95 px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wider text-ink"
+      >
+        {{ tour().duration }}
+      </p>
+    </div>
+    <div class="flex flex-1 flex-col p-5">
+      <p class="text-xs uppercase tracking-[0.16em] text-copper">{{ tour().availabilityLabel }}</p>
+      <h3 class="mt-2 font-display text-2xl font-semibold">{{ tour().title }}</h3>
+      <p class="mt-1 text-sm text-parchment/70">{{ tour().region }}</p>
+      <p class="mt-3 flex-1 text-sm leading-relaxed text-parchment/65">{{ tour().summary }}</p>
+      <span class="mt-4 text-sm font-semibold text-copper">Itinerary</span>
+    </div>
+  </a>
+}

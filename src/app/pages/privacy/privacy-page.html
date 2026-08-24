@@ -1,25 +1,27 @@
-<section class="bg-sand pb-20 pt-12">
+<section class="bg-parchment pb-24 pt-12">
   <div class="mx-auto max-w-3xl px-5 sm:px-8">
-    <h1 class="font-display text-4xl font-semibold text-forest">Privacy</h1>
-    <div class="mt-8 space-y-4 text-slate-warm">
+    <h1 class="font-display text-4xl font-semibold text-ink">Privacy</h1>
+    <div class="mt-8 space-y-4 text-muted">
       <p>
-        This website is an information and enquiry site for {{ org.name }}. It does not run user
-        accounts and does not keep a copy of the enquiry form.
+        This website is an information and enquiry site for {{ org.name }}. It does not run user accounts
+        and does not keep a copy of the enquiry form.
       </p>
       <p>
-        When you tap “Open email to send”, your device’s mail app opens a message to
-        {{ org.email }}. That email is then handled as ordinary correspondence.
+        When you tap “Send on WhatsApp”, your device opens WhatsApp with a message to
+        {{ org.phoneDisplay }}. When you tap “Open email instead”, your mail app opens a message to
+        {{ org.email }}. Those conversations are then handled as ordinary correspondence.
       </p>
       <p>
-        Links to YouTube, Facebook, TikTok and Instagram take you to those companies’ sites, which
-        have their own privacy notices. Video thumbnails are loaded from YouTube.
+        Links to YouTube, Facebook, TikTok and Instagram take you to those companies’ sites, which have
+        their own privacy notices. Video thumbnails and embeds are loaded from YouTube.
       </p>
       <p>
-        Hosting and repository pages (for example GitHub) may process technical logs such as IP
-        address according to their own policies.
+        Hosting and repository pages (for example GitHub) may process technical logs such as IP address
+        according to their own policies.
       </p>
       <p>
-        Questions: <a [href]="'mailto:' + org.email" class="text-emerald-600 hover:underline">{{ org.email }}</a>,
+        Questions:
+        <a [href]="'mailto:' + org.email" class="text-ink underline decoration-copper underline-offset-4">{{ org.email }}</a>,
         {{ org.addressFull }}.
       </p>
     </div>

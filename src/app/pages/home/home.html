@@ -1,158 +1,227 @@
-<section class="relative isolate overflow-hidden bg-forest text-cream">
-  <div class="absolute inset-0 -z-20 bg-gradient-to-br from-forest via-emerald to-forest-800" aria-hidden="true"></div>
-  <div class="geo-pattern-dense absolute inset-0 -z-10" aria-hidden="true"></div>
-
-  <div class="mx-auto flex min-h-[88vh] max-w-5xl flex-col items-center justify-center px-5 py-24 text-center sm:px-8">
-    <p class="animate-fade-up font-arabic text-3xl text-gold-300 sm:text-4xl" lang="ar" dir="rtl">
-      بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
-    </p>
+<section
+  class="relative isolate min-h-[100svh] overflow-hidden bg-midnight text-parchment"
+  (mouseenter)="pauseHero()"
+  (mouseleave)="resumeHero()"
+>
+  @for (slide of slides; track slide.id; let i = $index) {
     <img
-      src="brand/logo.png"
-      alt=""
-      width="96"
-      height="96"
-      class="animate-fade-up mt-8 h-24 w-24 rounded-full bg-cream object-cover ring-2 ring-gold/50"
-      style="animation-delay: 0.06s"
+      [src]="slide.image"
+      [alt]="slide.place"
+      class="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out"
+      [class.opacity-100]="slideIndex() === i"
+      [class.opacity-0]="slideIndex() !== i"
+      [attr.aria-hidden]="slideIndex() !== i"
     />
+  }
+  <div class="absolute inset-0 bg-gradient-to-r from-midnight via-midnight/70 to-midnight/20"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-midnight/90 via-transparent to-midnight/35"></div>
+
+  <div
+    class="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-5 pb-24 pt-28 sm:px-8"
+  >
+    @if (activeSlide(); as slide) {
+      <p class="animate-fade-up text-xs font-semibold uppercase tracking-[0.28em] text-copper">
+        {{ slide.place }}
+      </p>
+      <p class="mt-2 font-arabic text-lg text-parchment/75" lang="ar">{{ slide.placeAr }}</p>
+    }
+
     <h1
-      class="animate-fade-up mt-6 font-display text-4xl font-bold leading-tight sm:text-6xl"
-      style="animation-delay: 0.1s"
+      class="animate-fade-up mt-5 max-w-3xl font-display text-5xl font-semibold leading-[1.05] sm:text-7xl"
+      style="animation-delay: 0.08s"
     >
-      Ziyarat with <span class="text-gold-gradient">Asad Ali Shah</span>
+      Walk the sacred cities with a guide who teaches as you go.
     </h1>
     <p
-      class="animate-fade-up mt-5 max-w-2xl text-lg leading-relaxed text-cream/75 sm:text-xl"
-      style="animation-delay: 0.18s"
+      class="animate-fade-up mt-5 max-w-xl text-base leading-relaxed text-parchment/80 sm:text-lg"
+      style="animation-delay: 0.14s"
     >
-      Scholar-led journeys to the sacred sites of Islam — Iraq, the Two Holy Mosques, Al-Quds,
-      the cities of the awliya, and the heritage of Bosnia.
+      Hajj & Umrah, Iraq, Al-Quds, Uzbekistan and Bosnia — scholar-led UK groups from
+      Peterborough.
     </p>
-    <div class="animate-fade-up mt-10 flex flex-wrap items-center justify-center gap-4" style="animation-delay: 0.26s">
+
+    <div class="animate-fade-up mt-9 flex flex-wrap items-center gap-3" style="animation-delay: 0.2s">
       <a
-        routerLink="/tours"
-        class="rounded-full bg-gold px-8 py-3.5 font-semibold text-forest transition hover:bg-gold-300"
+        [routerLink]="['/tours', activeSlide().tourSlug]"
+        class="rounded-xl bg-parchment px-6 py-3.5 text-sm font-semibold text-ink hover:bg-stone"
       >
-        View tours
+        Explore {{ activeSlide().place }}
       </a>
       <a
-        routerLink="/enquire"
-        class="rounded-full border border-cream/25 px-8 py-3.5 font-medium text-cream/90 hover:border-gold/50 hover:text-gold-300"
-      >
-        Enquire for dates
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="bg-sand py-20">
-  <div class="mx-auto max-w-6xl px-5 sm:px-8">
-    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">The host</p>
-    <div class="mt-4 grid gap-10 md:grid-cols-2 md:items-center">
-      <div>
-        <h2 class="font-display text-4xl font-semibold text-forest">Syed Asad Ali Shah</h2>
-        <p class="mt-4 text-base leading-relaxed text-slate-warm">
-          A UK Islamic scholar and television host based in Peterborough. He takes groups to the
-          maqamat, explains the history of each shrine, and films the ziyarat so those at home can
-          still walk the path in knowledge.
-        </p>
-        <a routerLink="/about" class="mt-6 inline-flex font-semibold text-emerald-600 hover:text-gold-600">
-          Read his story →
-        </a>
-      </div>
-      <blockquote class="rounded-3xl border border-gold/20 bg-cream p-8 shadow-soft">
-        <p class="font-display text-2xl italic text-forest">
-          “I was fortunate to be with the group in October 2023. We visited Iraq and the three
-          blessed places of Baghdad Sharif, Najaf…”
-        </p>
-        <footer class="mt-4 text-sm text-slate-warm">Najabat Mahmood · traveller, Iraq ziyarat</footer>
-      </blockquote>
-    </div>
-  </div>
-</section>
-
-<section class="bg-cream py-20">
-  <div class="mx-auto max-w-6xl px-5 sm:px-8">
-    <div class="flex items-end justify-between gap-4">
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">Journeys</p>
-        <h2 class="mt-2 font-display text-4xl font-semibold text-forest">Where we take groups</h2>
-      </div>
-      <a routerLink="/tours" class="hidden font-semibold text-emerald-600 sm:inline">All tours →</a>
-    </div>
-    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      @for (tour of tours; track tour.slug) {
-        <a
-          [routerLink]="['/tours', tour.slug]"
-          class="group overflow-hidden rounded-3xl bg-forest text-cream shadow-portal"
-        >
-          <div class="relative aspect-[16/10] overflow-hidden">
-            <img
-              [src]="thumb(tour.imageVideoId)"
-              [alt]="tour.title"
-              class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-forest via-forest/20 to-transparent"></div>
-          </div>
-          <div class="p-6">
-            <p class="text-xs uppercase tracking-[0.16em] text-gold-300">{{ tour.duration }}</p>
-            <h3 class="mt-2 font-display text-2xl font-semibold">{{ tour.title }}</h3>
-            <p class="mt-2 text-sm text-cream/70">{{ tour.region }}</p>
-          </div>
-        </a>
-      }
-    </div>
-    <a routerLink="/tours" class="mt-8 inline-flex font-semibold text-emerald-600 sm:hidden">All tours →</a>
-  </div>
-</section>
-
-<section class="bg-forest py-20 text-cream">
-  <div class="mx-auto max-w-6xl px-5 sm:px-8">
-    <div class="flex items-end justify-between gap-4">
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">On film</p>
-        <h2 class="mt-2 font-display text-4xl font-semibold">Recent ziyarat films</h2>
-      </div>
-      <a
-        [href]="org.youtubeUrl"
+        [href]="chat"
         target="_blank"
         rel="noopener noreferrer"
-        class="hidden text-sm font-semibold text-gold-300 sm:inline"
+        class="inline-flex items-center gap-2 rounded-xl bg-whatsapp px-6 py-3.5 text-sm font-semibold text-white"
       >
-        YouTube channel →
+        <app-whatsapp-icon [size]="20" />
+        WhatsApp the group
+      </a>
+      <a
+        routerLink="/tours"
+        class="rounded-xl border border-parchment/25 px-6 py-3.5 text-sm font-medium text-parchment hover:border-copper"
+      >
+        All journeys
       </a>
     </div>
-    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      @for (film of films; track film.id) {
-        <a
-          [href]="watch(film.id)"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="overflow-hidden rounded-2xl bg-forest-800 ring-1 ring-white/10"
-        >
-          <img [src]="thumb(film.id)" [alt]="film.title" class="aspect-video w-full object-cover" />
-          <div class="p-4">
-            <p class="text-xs uppercase tracking-wider text-gold-300">{{ film.place }}</p>
-            <p class="mt-1 font-medium leading-snug">{{ film.title }}</p>
-          </div>
-        </a>
+
+    <div class="mt-12 flex flex-wrap items-center gap-4">
+      <div class="flex items-center gap-2" role="tablist" aria-label="Sacred places">
+        @for (slide of slides; track slide.id; let i = $index) {
+          <button
+            type="button"
+            role="tab"
+            class="h-2.5 rounded-full transition-all"
+            [class]="slideIndex() === i ? 'w-8 bg-copper' : 'w-2.5 bg-parchment/35 hover:bg-parchment/60'"
+            [attr.aria-selected]="slideIndex() === i"
+            [attr.aria-label]="slide.place"
+            (click)="goToSlide(i)"
+          ></button>
+        }
+      </div>
+      <p class="text-xs text-parchment/45">{{ activeSlide().credit }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="border-b border-stone bg-parchment py-6">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-2 px-5 sm:px-8">
+    <p class="mr-2 text-xs font-semibold uppercase tracking-[0.2em] text-muted">Destinations</p>
+    @for (chip of chips; track chip.id) {
+      <a
+        routerLink="/tours"
+        [queryParams]="{ dest: chip.id }"
+        class="rounded-full border border-stone bg-stone/50 px-4 py-2 text-sm font-medium text-ink hover:border-copper hover:bg-white"
+      >
+        {{ chip.label }}
+      </a>
+    }
+  </div>
+</section>
+
+<section class="bg-parchment py-20">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-copper">The collection</p>
+        <h2 class="mt-2 font-display text-4xl font-semibold text-ink sm:text-5xl">Where we take groups</h2>
+      </div>
+      <a routerLink="/tours" class="text-sm font-semibold text-ink underline decoration-copper underline-offset-4">
+        All journeys
+      </a>
+    </div>
+    <div class="mt-10 grid gap-5 lg:grid-cols-2">
+      <app-trip-card [tour]="featured" [featured]="true" />
+      <div class="grid gap-5 sm:grid-cols-2">
+        @for (tour of rest; track tour.slug) {
+          <app-trip-card [tour]="tour" />
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-stone py-20">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-copper">Why travel this way</p>
+    <h2 class="mt-2 max-w-2xl font-display text-4xl font-semibold text-ink sm:text-5xl">
+      Not a holiday package. A ziyarat with teaching.
+    </h2>
+    <div class="mt-12 grid gap-8 md:grid-cols-3">
+      @for (reason of reasons; track reason.title) {
+        <article class="border-t border-copper/40 pt-6">
+          <h3 class="font-display text-2xl font-semibold text-ink">{{ reason.title }}</h3>
+          <p class="mt-3 text-sm leading-relaxed text-muted">{{ reason.body }}</p>
+        </article>
       }
     </div>
   </div>
 </section>
 
-<section class="bg-sand py-16">
-  <div class="mx-auto max-w-3xl px-5 text-center sm:px-8">
-    <h2 class="font-display text-3xl font-semibold text-forest sm:text-4xl">
-      Ready to travel with knowledge?
-    </h2>
-    <p class="mt-4 text-slate-warm">
-      Tell us which ziyarat you have in mind. Dates, group size and itinerary are confirmed by email.
-    </p>
-    <a
-      routerLink="/enquire"
-      class="mt-8 inline-flex rounded-full bg-gold px-8 py-3.5 font-semibold text-forest hover:bg-gold-300"
-    >
-      Send an enquiry
-    </a>
+<section class="bg-parchment py-20">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-[0.22em] text-copper">Meet your guide</p>
+      <h2 class="mt-2 font-display text-4xl font-semibold text-ink sm:text-5xl">{{ org.hostName }}</h2>
+      <p class="mt-5 text-base leading-relaxed text-muted">
+        A UK Islamic scholar and television host. He takes groups to the maqamat, explains the history of
+        each shrine, and films the ziyarat so those at home can still walk the path in knowledge.
+      </p>
+      <a
+        routerLink="/about"
+        class="mt-6 inline-flex text-sm font-semibold text-ink underline decoration-copper underline-offset-4"
+      >
+        His story
+      </a>
+    </div>
+    @if (quotes[0]; as quote) {
+      <blockquote class="rounded-2xl bg-midnight p-8 text-parchment shadow-lift sm:p-10">
+        <p class="font-display text-2xl leading-snug italic sm:text-3xl">“{{ quote.quote }}”</p>
+        <footer class="mt-6 text-sm text-parchment/70">{{ quote.name }} · {{ quote.context }}</footer>
+      </blockquote>
+    }
   </div>
 </section>
+
+<section class="bg-midnight py-20 text-parchment">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-copper">On film</p>
+        <h2 class="mt-2 font-display text-4xl font-semibold">Recent ziyarat films</h2>
+      </div>
+      <a routerLink="/journeys" class="text-sm font-semibold text-copper">Watch in the archive</a>
+    </div>
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      @for (film of films; track film.id) {
+        <button
+          type="button"
+          class="group overflow-hidden rounded-2xl bg-midnight-800 text-left ring-1 ring-white/10"
+          (click)="playing.set(film.id)"
+        >
+          <span class="relative block aspect-video overflow-hidden">
+            <img
+              [src]="thumb(film.id)"
+              [alt]="film.title"
+              class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            />
+            <span
+              class="absolute inset-0 flex items-center justify-center bg-midnight/20 text-parchment opacity-90"
+              aria-hidden="true"
+            >
+              <span class="flex h-12 w-12 items-center justify-center rounded-full bg-parchment/90 text-ink">▶</span>
+            </span>
+          </span>
+          <span class="block p-4">
+            <span class="block text-xs uppercase tracking-wider text-copper">{{ film.place }}</span>
+            <span class="mt-1 block font-medium leading-snug">{{ film.title }}</span>
+          </span>
+        </button>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="bg-stone py-20">
+  <div class="mx-auto max-w-3xl px-5 text-center sm:px-8">
+    <h2 class="font-display text-4xl font-semibold text-ink sm:text-5xl">Ready for the next group?</h2>
+    <p class="mt-4 text-muted">
+      Dates, group size and itinerary are confirmed by message. Tell us which ziyarat you have in mind.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a
+        [href]="chat"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-xl bg-whatsapp px-7 py-3.5 text-sm font-semibold text-white"
+      >
+        <app-whatsapp-icon [size]="20" />
+        Message on WhatsApp
+      </a>
+      <a routerLink="/enquire" class="rounded-xl bg-midnight px-7 py-3.5 text-sm font-semibold text-parchment">
+        Send an enquiry
+      </a>
+    </div>
+  </div>
+</section>
+
+<app-video-lightbox [videoId]="playing()" (closed)="playing.set(null)" />

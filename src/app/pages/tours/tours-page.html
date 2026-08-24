@@ -1,37 +1,34 @@
-<section class="bg-sand pb-20 pt-12">
+<section class="bg-parchment pb-24 pt-12">
   <div class="mx-auto max-w-6xl px-5 sm:px-8">
-    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">Tours</p>
-    <h1 class="mt-2 font-display text-4xl font-semibold text-forest sm:text-5xl">
-      Ziyarat journeys from the UK
-    </h1>
-    <p class="mt-4 max-w-2xl text-slate-warm">
+    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-copper">Journeys</p>
+    <h1 class="mt-2 font-display text-4xl font-semibold text-ink sm:text-6xl">Ziyarat from the UK</h1>
+    <p class="mt-4 max-w-2xl text-muted">
       Each itinerary is scholar-led. Prices, flights and exact dates are confirmed when you enquire —
-      we do not publish a fixed brochure because groups and seasons change.
+      groups and seasons change.
     </p>
 
-    <div class="mt-12 space-y-8">
-      @for (tour of tours; track tour.slug) {
-        <article class="overflow-hidden rounded-3xl bg-cream shadow-soft md:grid md:grid-cols-5">
-          <img
-            [src]="thumb(tour.imageVideoId)"
-            [alt]="tour.title"
-            class="h-56 w-full object-cover md:col-span-2 md:h-full"
-          />
-          <div class="p-6 md:col-span-3 md:p-8">
-            <p class="text-xs uppercase tracking-[0.16em] text-gold-600">
-              {{ tour.duration }} · {{ tour.group }}
-            </p>
-            <h2 class="mt-2 font-display text-3xl font-semibold text-forest">{{ tour.title }}</h2>
-            <p class="mt-1 text-sm font-medium text-emerald-600">{{ tour.region }}</p>
-            <p class="mt-4 text-slate-warm">{{ tour.summary }}</p>
-            <a
-              [routerLink]="['/tours', tour.slug]"
-              class="mt-6 inline-flex font-semibold text-forest hover:text-gold-600"
-            >
-              Itinerary and enquire →
-            </a>
-          </div>
-        </article>
+    <div class="mt-10 flex flex-wrap gap-2">
+      @for (filter of filters; track filter.id) {
+        <button
+          type="button"
+          class="rounded-full border px-4 py-2 text-sm font-medium transition"
+          [class]="
+            selected() === filter.id
+              ? 'border-midnight bg-midnight text-parchment'
+              : 'border-stone bg-stone/40 text-ink hover:border-copper'
+          "
+          (click)="choose(filter.id)"
+        >
+          {{ filter.label }}
+        </button>
+      }
+    </div>
+
+    <div class="mt-12 grid gap-6 sm:grid-cols-2">
+      @for (tour of tours(); track tour.slug; let i = $index) {
+        <div [class]="i === 0 && selected() === 'all' ? 'sm:col-span-2' : ''">
+          <app-trip-card [tour]="tour" [featured]="i === 0 && selected() === 'all'" />
+        </div>
       }
     </div>
   </div>

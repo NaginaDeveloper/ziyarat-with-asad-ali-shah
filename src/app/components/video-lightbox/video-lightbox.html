@@ -1,0 +1,26 @@
+@if (embed(); as src) {
+  <div
+    class="fixed inset-0 z-[70] flex items-center justify-center bg-midnight/92 p-4 backdrop-blur-sm"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Watch film"
+    (click)="close()"
+  >
+    <button
+      type="button"
+      class="absolute top-5 right-5 rounded-lg border border-parchment/20 px-3 py-1.5 text-sm text-parchment hover:bg-white/10"
+      (click)="close()"
+    >
+      Close
+    </button>
+    <div class="aspect-video w-full max-w-5xl overflow-hidden rounded-xl shadow-lift" (click)="$event.stopPropagation()">
+      <iframe
+        [src]="src"
+        title="Ziyarat film"
+        class="h-full w-full"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+}

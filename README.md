@@ -2,6 +2,8 @@
 
 Tourism and ziyarat website for **Syed Asad Ali Shah** — scholar-led journeys from Peterborough, UK.
 
+**GitHub:** https://github.com/NaginaDeveloper/ziyarat-with-asad-ali-shah
+
 - Iraq ziyarat (Najaf, Karbala, Baghdad, Madaen)
 - Hajj and Umrah
 - Al-Quds

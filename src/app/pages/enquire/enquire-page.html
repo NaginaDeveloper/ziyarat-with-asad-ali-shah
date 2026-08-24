@@ -1,78 +1,144 @@
-<section class="bg-sand pb-20 pt-12">
-  <div class="mx-auto grid max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-5">
-    <div class="lg:col-span-2">
-      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">Enquire</p>
-      <h1 class="mt-2 font-display text-4xl font-semibold text-forest">Travel with the group</h1>
-      <p class="mt-4 text-slate-warm">
-        Send a note with your names, preferred tour and dates. The form opens your email to
-        {{ org.email }} — nothing is stored on this website.
-      </p>
-      <ul class="mt-8 space-y-3 text-sm text-forest">
-        <li>{{ org.addressFull }}</li>
-        <li>
-          <a [href]="'mailto:' + org.email" class="text-emerald-600 hover:underline">{{ org.email }}</a>
-        </li>
-        <li>
-          <a [href]="org.facebookUrl" target="_blank" rel="noopener noreferrer" class="text-emerald-600 hover:underline">
-            Facebook page
-          </a>
-        </li>
-      </ul>
-      <a
-        [href]="org.mapsDirectionsUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="mt-8 inline-flex rounded-full border border-gold/30 bg-cream px-5 py-3 text-sm font-semibold text-forest hover:border-gold"
-      >
-        Open in Google Maps
-      </a>
-    </div>
+<section class="bg-parchment pb-24 pt-12">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-copper">Plan your journey</p>
+    <h1 class="mt-2 font-display text-4xl font-semibold text-ink sm:text-6xl">Enquire</h1>
+    <p class="mt-4 max-w-2xl text-muted">
+      WhatsApp is the fastest way to join a group. Email is there if you prefer a written record. Nothing
+      is stored on this website.
+    </p>
 
-    <form class="lg:col-span-3 rounded-3xl bg-cream p-6 shadow-soft sm:p-8" (ngSubmit)="submit()" [formGroup]="form">
-      <div class="grid gap-5 sm:grid-cols-2">
-        <label class="block text-sm font-medium text-forest">
-          Full name
-          <input class="mt-2 w-full rounded-xl border border-mist bg-white px-3 py-3" formControlName="name" autocomplete="name" />
-        </label>
-        <label class="block text-sm font-medium text-forest">
-          Email
-          <input class="mt-2 w-full rounded-xl border border-mist bg-white px-3 py-3" formControlName="email" type="email" autocomplete="email" />
-        </label>
-        <label class="block text-sm font-medium text-forest">
-          Phone
-          <input class="mt-2 w-full rounded-xl border border-mist bg-white px-3 py-3" formControlName="phone" type="tel" autocomplete="tel" />
-        </label>
-        <label class="block text-sm font-medium text-forest">
-          Number of travellers
-          <input class="mt-2 w-full rounded-xl border border-mist bg-white px-3 py-3" formControlName="party" />
-        </label>
-        <label class="block text-sm font-medium text-forest sm:col-span-2">
-          Tour
-          <select class="mt-2 w-full rounded-xl border border-mist bg-white px-3 py-3" formControlName="tour">
-            <option value="">I am not sure yet</option>
-            @for (tour of tours; track tour.slug) {
-              <option [value]="tour.slug">{{ tour.title }}</option>
-            }
-          </select>
-        </label>
-        <label class="block text-sm font-medium text-forest sm:col-span-2">
-          Preferred dates
-          <input class="mt-2 w-full rounded-xl border border-mist bg-white px-3 py-3" formControlName="dates" placeholder="e.g. Muharram 2027, or October half-term" />
-        </label>
-        <label class="block text-sm font-medium text-forest sm:col-span-2">
-          Message
-          <textarea class="mt-2 min-h-32 w-full rounded-xl border border-mist bg-white px-3 py-3" formControlName="message"></textarea>
-        </label>
-      </div>
-      <button
-        type="submit"
-        class="mt-6 rounded-full bg-gold px-8 py-3.5 font-semibold text-forest hover:bg-gold-300"
-      >
-        Open email to send
-      </button>
-      @if (sent) {
-        <p class="mt-4 text-sm text-emerald-600">Your mail app should open. If it does not, write to {{ org.email }}.</p>
-      }
-    </form>
+    <ol class="mt-10 grid gap-4 sm:grid-cols-3">
+      <li class="rounded-2xl border border-stone bg-stone/40 p-5">
+        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-copper">01</p>
+        <p class="mt-2 font-display text-xl font-semibold">Choose a journey</p>
+        <p class="mt-1 text-sm text-muted">Iraq, Hajj & Umrah, Al-Quds, Uzbekistan or Bosnia.</p>
+      </li>
+      <li class="rounded-2xl border border-stone bg-stone/40 p-5">
+        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-copper">02</p>
+        <p class="mt-2 font-display text-xl font-semibold">Travellers and dates</p>
+        <p class="mt-1 text-sm text-muted">Names, how many are travelling, and a season if you know it.</p>
+      </li>
+      <li class="rounded-2xl border border-stone bg-stone/40 p-5">
+        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-copper">03</p>
+        <p class="mt-2 font-display text-xl font-semibold">Message on WhatsApp</p>
+        <p class="mt-1 text-sm text-muted">We reply with dates, what is included, and next steps.</p>
+      </li>
+    </ol>
+
+    <div class="mt-14 grid gap-12 lg:grid-cols-5">
+      <aside class="lg:col-span-2">
+        <h2 class="font-display text-2xl font-semibold text-ink">Talk to the group</h2>
+        <ul class="mt-6 space-y-3 text-sm text-ink">
+          <li>
+            <span class="inline-flex items-center gap-1.5">
+              <app-whatsapp-icon [size]="18" />
+              WhatsApp
+            </span>
+            <a [href]="org.telUrl" class="block font-semibold text-whatsapp">{{ org.phoneDisplay }}</a>
+          </li>
+          <li>
+            Email
+            <a [href]="'mailto:' + org.email" class="block font-semibold hover:underline">{{ org.email }}</a>
+          </li>
+          <li>
+            Operations
+            <span class="block text-muted">{{ org.addressFull }}</span>
+          </li>
+        </ul>
+        <a
+          [href]="org.mapsDirectionsUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-8 inline-flex rounded-xl border border-stone px-4 py-2.5 text-sm font-semibold text-ink hover:border-copper"
+        >
+          Open in Google Maps
+        </a>
+      </aside>
+
+      <form class="lg:col-span-3 rounded-2xl border border-stone bg-white p-6 sm:p-8" [formGroup]="form">
+        <fieldset>
+          <legend class="text-sm font-semibold text-ink">Journey</legend>
+          <label class="mt-3 block text-sm text-muted">
+            Which ziyarat?
+            <select class="mt-2 w-full rounded-xl border border-stone bg-parchment px-3 py-3 text-ink" formControlName="tour">
+              <option value="">I am not sure yet</option>
+              @for (tour of tours; track tour.slug) {
+                <option [value]="tour.slug">{{ tour.title }}</option>
+              }
+            </select>
+          </label>
+        </fieldset>
+
+        <fieldset class="mt-8">
+          <legend class="text-sm font-semibold text-ink">Travellers and dates</legend>
+          <div class="mt-3 grid gap-5 sm:grid-cols-2">
+            <label class="block text-sm text-muted">
+              Number of travellers
+              <input class="mt-2 w-full rounded-xl border border-stone bg-parchment px-3 py-3 text-ink" formControlName="party" />
+            </label>
+            <label class="block text-sm text-muted">
+              Preferred dates
+              <input
+                class="mt-2 w-full rounded-xl border border-stone bg-parchment px-3 py-3 text-ink"
+                formControlName="dates"
+                placeholder="e.g. Muharram, or October half-term"
+              />
+            </label>
+            <label class="block text-sm text-muted sm:col-span-2">
+              Message
+              <textarea class="mt-2 min-h-28 w-full rounded-xl border border-stone bg-parchment px-3 py-3 text-ink" formControlName="message"></textarea>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="mt-8">
+          <legend class="text-sm font-semibold text-ink">Your contact</legend>
+          <div class="mt-3 grid gap-5 sm:grid-cols-2">
+            <label class="block text-sm text-muted">
+              Full name
+              <input class="mt-2 w-full rounded-xl border border-stone bg-parchment px-3 py-3 text-ink" formControlName="name" autocomplete="name" />
+            </label>
+            <label class="block text-sm text-muted">
+              Phone
+              <input class="mt-2 w-full rounded-xl border border-stone bg-parchment px-3 py-3 text-ink" formControlName="phone" type="tel" autocomplete="tel" />
+            </label>
+            <label class="block text-sm text-muted sm:col-span-2">
+              Email <span class="font-normal">(needed only if you send by email)</span>
+              <input class="mt-2 w-full rounded-xl border border-stone bg-parchment px-3 py-3 text-ink" formControlName="email" type="email" autocomplete="email" />
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <button
+            type="button"
+            class="inline-flex items-center gap-2 rounded-xl bg-whatsapp px-6 py-3.5 text-sm font-semibold text-white"
+            (click)="sendWhatsApp()"
+          >
+            <app-whatsapp-icon [size]="20" />
+            Send on WhatsApp
+          </button>
+          <button
+            type="button"
+            class="rounded-xl bg-midnight px-6 py-3.5 text-sm font-semibold text-parchment"
+            (click)="sendEmail()"
+          >
+            Open email instead
+          </button>
+        </div>
+        @if (form.controls.name.touched && form.controls.name.invalid) {
+          <p class="mt-3 text-sm text-copper-600">Please add your name so we know who is writing.</p>
+        }
+        @if (sent === 'whatsapp') {
+          <p class="mt-4 text-sm text-muted">WhatsApp should open with your enquiry filled in.</p>
+        }
+        @if (sent === 'email') {
+          <p class="mt-4 text-sm text-muted">
+            Your mail app should open. If it does not, write to
+            <a [href]="'mailto:' + org.email" class="underline">{{ org.email }}</a>.
+          </p>
+        }
+      </form>
+    </div>
   </div>
 </section>

@@ -1,44 +1,104 @@
-<section class="bg-sand pb-20 pt-12">
-  <div class="mx-auto max-w-5xl px-5 sm:px-8">
-    <a routerLink="/tours" class="text-sm font-semibold text-emerald-600 hover:text-gold-600">← All tours</a>
-
-    @if (tour(); as t) {
-      <div class="mt-6 overflow-hidden rounded-3xl bg-cream shadow-soft">
-        <img [src]="thumb(t.imageVideoId)" [alt]="t.title" class="h-64 w-full object-cover sm:h-80" />
-        <div class="p-6 sm:p-10">
-          <p class="text-xs uppercase tracking-[0.16em] text-gold-600">{{ t.duration }} · {{ t.group }}</p>
-          <h1 class="mt-2 font-display text-4xl font-semibold text-forest sm:text-5xl">{{ t.title }}</h1>
-          <p class="mt-2 font-medium text-emerald-600">{{ t.region }}</p>
-          <p class="mt-6 text-lg leading-relaxed text-slate-warm">{{ t.story }}</p>
-
-          <h2 class="mt-10 font-display text-2xl font-semibold text-forest">Stops</h2>
-          <ul class="mt-4 space-y-4">
-            @for (stop of t.stops; track stop.place) {
-              <li class="rounded-2xl border border-mist bg-sand/60 p-4">
-                <p class="font-semibold text-forest">{{ stop.place }}</p>
-                <p class="mt-1 text-sm text-slate-warm">{{ stop.note }}</p>
-              </li>
-            }
-          </ul>
-
-          <h2 class="mt-10 font-display text-2xl font-semibold text-forest">What to expect</h2>
-          <ul class="mt-4 grid gap-3 sm:grid-cols-2">
-            @for (item of t.includes; track item) {
-              <li class="rounded-xl bg-sand px-4 py-3 text-sm text-forest">{{ item }}</li>
-            }
-          </ul>
-
-          <a
-            routerLink="/enquire"
-            [queryParams]="{ tour: t.slug }"
-            class="mt-10 inline-flex rounded-full bg-gold px-8 py-3.5 font-semibold text-forest hover:bg-gold-300"
-          >
-            Enquire about this tour
-          </a>
-        </div>
+<section class="bg-parchment pb-24">
+  @if (tour(); as t) {
+    <div class="relative isolate overflow-hidden bg-midnight text-parchment">
+      <img [src]="t.coverImage" [alt]="t.title" class="absolute inset-0 h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/55 to-midnight/25"></div>
+      <div class="relative mx-auto max-w-6xl px-5 pb-16 pt-16 sm:px-8 sm:pt-20">
+        <a routerLink="/tours" class="text-sm font-semibold text-parchment/80 hover:text-copper">← All journeys</a>
+        <p class="mt-8 text-xs font-semibold uppercase tracking-[0.22em] text-copper">
+          {{ t.duration }} · {{ t.group }}
+        </p>
+        <h1 class="mt-3 max-w-3xl font-display text-4xl font-semibold sm:text-6xl">{{ t.title }}</h1>
+        <p class="mt-3 text-lg text-parchment/80">{{ t.region }}</p>
       </div>
-    } @else {
-      <p class="mt-10 text-slate-warm">This tour was not found.</p>
-    }
-  </div>
+    </div>
+
+    <div class="mx-auto grid max-w-6xl gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[1fr_20rem]">
+      <div>
+        <p class="text-lg leading-relaxed text-muted">{{ t.story }}</p>
+
+        <h2 class="mt-14 font-display text-3xl font-semibold text-ink">Itinerary</h2>
+        <div class="mt-8">
+          <app-itinerary-timeline [stops]="t.stops" />
+        </div>
+
+        <div class="mt-14 grid gap-8 sm:grid-cols-2">
+          <div>
+            <h2 class="font-display text-2xl font-semibold text-ink">What is included</h2>
+            <ul class="mt-4 space-y-2 text-sm text-muted">
+              @for (item of t.includes; track item) {
+                <li class="border-b border-stone py-2">{{ item }}</li>
+              }
+            </ul>
+          </div>
+          <div>
+            <h2 class="font-display text-2xl font-semibold text-ink">Confirm when you enquire</h2>
+            <ul class="mt-4 space-y-2 text-sm text-muted">
+              @for (item of t.excludes; track item) {
+                <li class="border-b border-stone py-2">{{ item }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+
+        @if (films().length) {
+          <h2 class="mt-14 font-display text-3xl font-semibold text-ink">Films from this journey</h2>
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            @for (film of films(); track film.id) {
+              <button
+                type="button"
+                class="overflow-hidden rounded-2xl bg-midnight text-left text-parchment"
+                (click)="playing.set(film.id)"
+              >
+                <img [src]="thumb(film.id)" [alt]="film.title" class="aspect-video w-full object-cover" />
+                <span class="block p-4 text-sm font-medium">{{ film.title }}</span>
+              </button>
+            }
+          </div>
+        }
+
+        <h2 class="mt-14 font-display text-3xl font-semibold text-ink">Questions</h2>
+        <dl class="mt-6 divide-y divide-stone border-y border-stone">
+          @for (faq of t.faqs; track faq.q) {
+            <div class="py-5">
+              <dt class="font-semibold text-ink">{{ faq.q }}</dt>
+              <dd class="mt-2 text-sm leading-relaxed text-muted">{{ faq.a }}</dd>
+            </div>
+          }
+        </dl>
+      </div>
+
+      <aside class="h-fit rounded-2xl border border-stone bg-stone/50 p-6 lg:sticky lg:top-24">
+        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-copper">Next departure</p>
+        <p class="mt-2 font-display text-2xl font-semibold text-ink">{{ t.availabilityLabel }}</p>
+        <p class="mt-2 text-sm text-muted">{{ t.duration }} · {{ t.group }}</p>
+        <a
+          [href]="chat()"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-whatsapp px-4 py-3 text-sm font-semibold text-white"
+        >
+          <app-whatsapp-icon [size]="20" />
+          WhatsApp about this tour
+        </a>
+        <a
+          routerLink="/enquire"
+          [queryParams]="{ tour: t.slug }"
+          class="mt-3 flex items-center justify-center rounded-xl bg-midnight px-4 py-3 text-sm font-semibold text-parchment"
+        >
+          Enquire in writing
+        </a>
+        <a [href]="org.telUrl" class="mt-3 block text-center text-sm text-muted hover:text-ink">
+          Call {{ org.phoneDisplay }}
+        </a>
+      </aside>
+    </div>
+  } @else {
+    <div class="mx-auto max-w-6xl px-5 py-24 sm:px-8">
+      <p class="text-muted">This journey was not found.</p>
+      <a routerLink="/tours" class="mt-4 inline-flex font-semibold text-ink">Back to journeys</a>
+    </div>
+  }
 </section>
+
+<app-video-lightbox [videoId]="playing()" (closed)="playing.set(null)" />
